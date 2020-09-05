@@ -1,0 +1,79 @@
+<html>
+
+<head>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <TItle>CRUD</TItle>
+</head>
+
+<body>
+  
+    <div class="container py-5 px-5 ">
+        <div class="form-group">
+            <label>productName:</label>
+            <input class="form-control " type="text" id="productName">
+        </div> 
+        <div id="productNameValidiation" class="alert alert-danger d-none mt-1">
+            <p>YOu Should   </p>
+        </div>
+        <div class="form-group">
+            <label>productPrice: </label>
+            <input class="form-control" type="number" id="productPrice">
+        </div>
+        <div id="productPriceValidiation" class="alert alert-danger d-none ">
+            <p>YOu Should   </p>
+        </div>
+        <div class="form-group">
+            <label>productCategory: </label>
+            <input class="form-control" type="text" id="productCategory">
+        </div>
+        <div class="form-group">
+            <label>productDescription :</label>
+            <textarea class="form-control" type="text" id="productDescription"></textarea>
+        </div>
+       <div class="d-flex justify-content-around">
+        <button onclick=" addProduct()"  class="btn btn-outline-info mr-auto">Add Product</button>
+        <button onclick="deleteAllProduct(porductList)"  class="btn btn-outline-danger"> Delate All</button>
+       </div>
+    </div>
+    <div class="container py-4">
+        <input onkeyup="searchedProduct()" placeholder="Search .." class="form-control w-50 m-auto " type="text" name="" id="searchTrerm" >
+   
+        <table class="table  table-dark table-striped text-center mt-5">
+            <thead class="text-info text-capitalize">
+                <th>index</th>
+                <th>ProductName</th>
+                <th>ProductPrice</th>
+                <th>ProductCategory</th>
+                <th>ProductDesc</th>
+                <th>update</th>
+                <th>delete</th>
+
+            </thead>
+        <tbody id="tableBody" class= >
+                
+            </tbody>
+
+
+
+        </table>
+   
+   
+   
+   
+   
+    </div>
+
+
+
+
+
+
+    <script src="js/first.js"></script>
+
+
+</body>
+
+</html>
