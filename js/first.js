@@ -5,18 +5,24 @@ var productCategory = document.getElementById("productCategory");
 var productDesc = document.getElementById("productDescription");
 var productNameValidiation =document.getElementById("productNameValidiation");
 var productPriceValidiation = document.getElementById("productPriceValidiation");
+var productDescrValidiation = document.getElementById("productDescrValidiation");
 
+var prodNameRegex =/^[A-Z][a-z]{2,8}$/;
+var proPriceRegex =/^(([1-9][0-9]{2,8})|([1-9][0-9]{3})|(10000))$/;
+var prodDescRegex =/^[A-Za-z]*$/;
+
+// validateProductName ****************************
 
 function validateProductName()
 {
 
-    var regex = /^[A-Z][a-z]{2,8}$/;
-    if (regex.test(productName.value) == true)
+    if (prodNameRegex.test(productName.value) == true)
     {
        
         productName.classList.add("is-valid");
         productName.classList.remove("is-invalid");
          productNameValidiation.classList.replace("d-block","d-none");
+
     }
     else{
         productName.classList.add("is-invalid");
@@ -28,13 +34,17 @@ function validateProductName()
 
 }
 productName.addEventListener("keyup",validateProductName)
+/*....................................*/
+
+
+//validateProductPrice
 
 
 function validateProductPrice()
 {
 
-    var regex = /^(([1-9][0-9]{2,8})|([1-9][0-9]{3})|(10000))$/;
-    if (regex.test(productPrice.value) == true)
+ 
+    if (proPriceRegex.test(productPrice.value) == true)
     {
        
         productPrice.classList.add("is-valid");
@@ -53,6 +63,43 @@ function validateProductPrice()
 }
 productPrice.addEventListener("keyup",validateProductPrice)
 
+
+
+/*....................................*/
+
+
+//validateProductDescription
+
+
+function validateProductDescription()
+{
+
+ 
+    if (prodDescRegex.test(productDesc.value) == true)
+    {
+       
+        productDescription.classList.add("is-valid");
+        productDescription.classList.remove("is-invalid");
+        productDescrValidiation.classList.replace("d-block","d-none");
+        
+    }
+    else{
+       
+       
+        productDescription.classList.add("is-invalid");
+        productDescription.classList.remove("is-valid");
+        productDescrValidiation.classList.replace("d-none","d-block");
+    }
+
+}
+productDescription.addEventListener("keyup",validateProductDescription)
+
+
+
+
+
+
+// check if there any storded 
 var porductList ;
 
 if (localStorage.getItem("ourProduct")==null)
@@ -64,9 +111,15 @@ else{
     
     displayProduct(porductList);
 };
+
+
+
+
 function addProduct() //----------> full The Array      typm
  {
-    var product =
+     if ( (prodNameRegex.test(productName.value) &&proPriceRegex.test(productPrice.value) && prodDescRegex.test(productDesc.value))==true)
+  {
+     var product =
     {
         name: productName.value,
         price: productPrice.value,
@@ -79,10 +132,16 @@ function addProduct() //----------> full The Array      typm
     localStorage.setItem("ourProduct",JSON.stringify(porductList));
     displayProduct(porductList);
     clearItem();
+    productName.classList.remove("is-valid");
+    productPrice.classList.remove("is-valid");
+    productDesc.classList.remove("is-valid");
+}
 
 }
 
-function displayProduct(anyArray) {
+function displayProduct(anyArray)
+ {
+
     var cartona ="";
     for (var i = 0; i< anyArray.length ; i++)
      {
@@ -103,8 +162,8 @@ function displayProduct(anyArray) {
     document.getElementById("tableBody").innerHTML= cartona;
 }
 function clearItem(){
-    porductList.value=""
-    ;productPrice.value="";
+    productName.value="";
+    productPrice.value="";
     productCategory.value="";
     productDescription.value="";
 }
